@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    h1= title
+    p Welcome to orders page #{title}
+
+    form#formOrders(name="addOrder",method="post",action="/addOrder")
+        p Enter number of orders to make?
+
+        input#inputOrderNumber(type="number", placeholder="orderNumber", name="orderNumber")
+
+        button#btnSubmitr(type="submit") submit
+
+        ul#myList
+
