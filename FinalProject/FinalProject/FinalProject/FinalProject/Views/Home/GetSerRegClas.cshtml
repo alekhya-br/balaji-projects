@@ -1,0 +1,21 @@
+﻿@using FinalProject.Models;
+@{
+    ViewBag.Title = "GetSerRegClas";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<table>
+    @foreach (RegSerClas item in ViewBag.SerReg)
+    {
+        <tr>
+            <td>@item.NameofRegistrant </td>
+            <td>@item.SeriesName </td>
+            <td>@item.ClassName </td>
+        </tr>
+    }
+    
+</table>
+
+
+

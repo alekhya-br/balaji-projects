@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InvestmentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="ClassID" />
+    </Key>
+    <Property Name="ClassID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AddressID" Type="Int32" />
+    <Property Name="ClassName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="RegistrantAddress" Relationship="Self.FK_Class_RegistrantAddress" FromRole="Class" ToRole="RegistrantAddress" />
+  </EntityType>
+  <EntityType Name="RegistrantAddress">
+    <Key>
+      <PropertyRef Name="AddressID" />
+    </Key>
+    <Property Name="AddressID" Type="Int32" Nullable="false" />
+    <Property Name="SeriesID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ReportingFileNumber" Type="Int32" />
+    <Property Name="NameofRegistrant" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StreetAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ZipCode" Type="Int32" />
+    <NavigationProperty Name="Classes" Relationship="Self.FK_Class_RegistrantAddress" FromRole="RegistrantAddress" ToRole="Class" />
+    <NavigationProperty Name="Series" Relationship="Self.FK_RegistrantAddress_Series" FromRole="RegistrantAddress" ToRole="Series" />
+  </EntityType>
+  <EntityType Name="Series">
+    <Key>
+      <PropertyRef Name="SeriesID" />
+    </Key>
+    <Property Name="SeriesID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SeriesName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="RegistrantAddresses" Relationship="Self.FK_RegistrantAddress_Series" FromRole="Series" ToRole="RegistrantAddress" />
+  </EntityType>
+  <Association Name="FK_Class_RegistrantAddress">
+    <End Role="RegistrantAddress" Type="Self.RegistrantAddress" Multiplicity="0..1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RegistrantAddress">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="Class">
+        <PropertyRef Name="AddressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RegistrantAddress_Series">
+    <End Role="Series" Type="Self.Series" Multiplicity="0..1" />
+    <End Role="RegistrantAddress" Type="Self.RegistrantAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Series">
+        <PropertyRef Name="SeriesID" />
+      </Principal>
+      <Dependent Role="RegistrantAddress">
+        <PropertyRef Name="SeriesID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="InvestmentEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Classes" EntityType="Self.Class" />
+    <EntitySet Name="RegistrantAddresses" EntityType="Self.RegistrantAddress" />
+    <EntitySet Name="Series" EntityType="Self.Series" />
+    <AssociationSet Name="FK_Class_RegistrantAddress" Association="Self.FK_Class_RegistrantAddress">
+      <End Role="RegistrantAddress" EntitySet="RegistrantAddresses" />
+      <End Role="Class" EntitySet="Classes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RegistrantAddress_Series" Association="Self.FK_RegistrantAddress_Series">
+      <End Role="Series" EntitySet="Series" />
+      <End Role="RegistrantAddress" EntitySet="RegistrantAddresses" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2> Welcome to MVC App</h2><br /><br />
+
+<form method="post" action="@Url.Action("GetRegistration", "Home")">
+
+    List the names of registrant and there series that are available in New York.<br />
+    
+    <p><button type="submit">Submit</button></p>
+</form>
+<br /><br /><br /><br />
+<form method="post" action="@Url.Action("GetSeries", "Home")">
+
+    List the series names that are classified under Class A<br />
+
+    <p><button type="submit">Submit</button></p>
+</form>
+<br /><br /><br /><br />
+<form method="post" action="@Url.Action("GetSerRegClas", "Home")">
+
+    List the names of the registrant and series and classes they belong to<br />
+
+    <p><button type="submit">Submit</button></p>
+</form>

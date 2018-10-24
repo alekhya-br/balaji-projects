@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Get Series";
+}
+<h2>@ViewBag.Title.</h2>
+
+<ul>
+    @foreach (Series item in ViewBag.SeriesClass)
+    {
+        <li>@item.SeriesName </li>
+    }
+
+</ul>

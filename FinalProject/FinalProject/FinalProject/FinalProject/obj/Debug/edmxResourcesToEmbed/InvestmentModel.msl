@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InvestmentModelStoreContainer" CdmEntityContainer="InvestmentEntities1">
+    <EntitySetMapping Name="Classes">
+      <EntityTypeMapping TypeName="InvestmentModel.Class">
+        <MappingFragment StoreEntitySet="Class">
+          <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RegistrantAddresses">
+      <EntityTypeMapping TypeName="InvestmentModel.RegistrantAddress">
+        <MappingFragment StoreEntitySet="RegistrantAddress">
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="SeriesID" ColumnName="SeriesID" />
+          <ScalarProperty Name="ReportingFileNumber" ColumnName="ReportingFileNumber" />
+          <ScalarProperty Name="NameofRegistrant" ColumnName="NameofRegistrant" />
+          <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Series">
+      <EntityTypeMapping TypeName="InvestmentModel.Series">
+        <MappingFragment StoreEntitySet="Series">
+          <ScalarProperty Name="SeriesID" ColumnName="SeriesID" />
+          <ScalarProperty Name="SeriesName" ColumnName="SeriesName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

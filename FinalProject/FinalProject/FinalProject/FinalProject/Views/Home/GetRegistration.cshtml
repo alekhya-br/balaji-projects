@@ -1,0 +1,17 @@
+﻿@using FinalProject.Models;
+@{
+    ViewBag.Title = "Get Registrations";
+}
+<h2>@ViewBag.Title.</h2>
+
+<table>
+    @foreach (Registration item in ViewBag.Registrant)
+    {
+        <tr>
+            <td>@item.NameofRegistrant </td>
+            <td>@item.SeriesName </td>
+        </tr>
+    }
+
+</table>
+

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InvestmentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="ClassID" />
+    </Key>
+    <Property Name="ClassID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AddressID" Type="int" />
+    <Property Name="ClassName" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="RegistrantAddress">
+    <Key>
+      <PropertyRef Name="AddressID" />
+    </Key>
+    <Property Name="AddressID" Type="int" Nullable="false" />
+    <Property Name="SeriesID" Type="nvarchar" MaxLength="50" />
+    <Property Name="ReportingFileNumber" Type="int" />
+    <Property Name="NameofRegistrant" Type="nvarchar(max)" />
+    <Property Name="StreetAddress" Type="nvarchar(max)" />
+    <Property Name="City" Type="nvarchar(max)" />
+    <Property Name="State" Type="nvarchar" MaxLength="50" />
+    <Property Name="ZipCode" Type="int" />
+  </EntityType>
+  <EntityType Name="Series">
+    <Key>
+      <PropertyRef Name="SeriesID" />
+    </Key>
+    <Property Name="SeriesID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SeriesName" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK_Class_RegistrantAddress">
+    <End Role="RegistrantAddress" Type="Self.RegistrantAddress" Multiplicity="0..1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RegistrantAddress">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="Class">
+        <PropertyRef Name="AddressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RegistrantAddress_Series">
+    <End Role="Series" Type="Self.Series" Multiplicity="0..1" />
+    <End Role="RegistrantAddress" Type="Self.RegistrantAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Series">
+        <PropertyRef Name="SeriesID" />
+      </Principal>
+      <Dependent Role="RegistrantAddress">
+        <PropertyRef Name="SeriesID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="InvestmentModelStoreContainer">
+    <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RegistrantAddress" EntityType="Self.RegistrantAddress" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Series" EntityType="Self.Series" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Class_RegistrantAddress" Association="Self.FK_Class_RegistrantAddress">
+      <End Role="RegistrantAddress" EntitySet="RegistrantAddress" />
+      <End Role="Class" EntitySet="Class" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RegistrantAddress_Series" Association="Self.FK_RegistrantAddress_Series">
+      <End Role="Series" EntitySet="Series" />
+      <End Role="RegistrantAddress" EntitySet="RegistrantAddress" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
